@@ -18,9 +18,26 @@ def controllerAPI():
     def command(servo, directive, detail):
 
         if servo.upper() == "JAW" or servo.upper() == "EYESV" or servo.upper() == "EYESH" or servo.upper() == "NECKPIVOT":
-            if directive.upper() == "MOVE" or directive.upper() == "SET":
+            if directive.upper() == "MOVE" or directive.upper() == "PIN" or directive.upper() == "SPEED":
+                
+                if servo.upper() == "JAW":
+                    servo = "C"
+                elif servo.upper() == "EYESV":
+                    servo = "B"
+                elif servo.upper() == "EYESH":
+                    servo = "A"
+                elif servo.upper == "NECKPIVOT":
+                    servo = "D"
+
+                if directive.upper() == "MOVE":
+                    directive = "M"
+                elif directive.upper() == "PIN":
+                    directive = "P"
+                elif directive.upper() == "SPEED":
+                    directive = "S"
+                    
                 commandReferenceID = uuid.uuid4()
-                commandString = directive.upper() + ":" + servo + ":" + detail.upper() + ":" + str(commandReferenceID)[0:13] + ":"
+                commandString = directive + servo + detail
                 issueCommand(commandString, str(commandReferenceID)[0:13])
 
                 return str(commandReferenceID)[0:13]
