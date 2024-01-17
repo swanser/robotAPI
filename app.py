@@ -37,7 +37,7 @@ def controllerAPI():
                     directive = "S"
                     
                 commandReferenceID = uuid.uuid4()
-                commandString = directive + servo + detail
+                commandString = directive + servo + detail + ';'
                 issueCommand(commandString, str(commandReferenceID)[0:13])
 
                 return str(commandReferenceID)[0:13]
